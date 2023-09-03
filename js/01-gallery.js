@@ -39,7 +39,22 @@ function onClickImageHandle(event) {
   <div class="modal">
       <img src="${imageInfo.original}" alt="${imageInfo.description}" width="800" height="600" />
       </div>
-   `);
+   `, {
+      onShow: () => {
+        window.addEventListener('keydown', keyPressHandle)
+      },
+  
+      onClose: () => {
+        window.removeEventListener('keydown', keyPressHandle)
+      },
+    }
+    );
 
   instance.show();
+
+  function keyPressHandle(event) {
+    if (event.key === "Escape") {
+      instance.close();
+   }
+ }
 };
